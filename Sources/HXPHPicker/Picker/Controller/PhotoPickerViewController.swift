@@ -279,7 +279,13 @@ public class PhotoPickerViewController: BaseViewController {
     }
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let margin: CGFloat = UIDevice.leftMargin
+        let margin: CGFloat = {
+            if let picker = pickerController {
+                return picker.config.photoList.margin
+            } else {
+                return UIDevice.leftMargin
+            }
+        }()
         collectionView.frame = CGRect(x: margin, y: 0, width: view.width - 2 * margin, height: view.height)
         var collectionTop: CGFloat = UIDevice.navigationBarHeight
         if let nav = navigationController {
