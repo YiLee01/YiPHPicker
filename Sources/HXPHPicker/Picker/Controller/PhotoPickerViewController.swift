@@ -279,24 +279,34 @@ public class PhotoPickerViewController: BaseViewController {
     }
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let margin: CGFloat = {
+        let horizaonalMargin: CGFloat = {
             if let picker = pickerController {
-                return picker.config.photoList.margin
+                return picker.config.photoList.horizaonalMargin
             } else {
                 return UIDevice.leftMargin
             }
         }()
-        collectionView.frame = CGRect(x: margin, y: 0, width: view.width - 2 * margin, height: view.height)
+        let topMargin: CGFloat = {
+            if let picker = pickerController {
+                return picker.config.photoList.topMargin
+            } else {
+                return UIDevice.navigationBarHeight
+            }
+        }()
+        collectionView.frame = CGRect(x: horizaonalMargin,
+                                      y: 0,
+                                      width: view.width - 2 * horizaonalMargin,
+                                      height: view.height)
         var collectionTop: CGFloat = UIDevice.navigationBarHeight
         if let nav = navigationController {
             if nav.modalPresentationStyle == .fullScreen && UIDevice.isPortrait {
                 if UIApplication.shared.isStatusBarHidden {
-                    collectionTop = nav.navigationBar.height + UIDevice.generalStatusBarHeight
+                    collectionTop = nav.navigationBar.height + UIDevice.generalStatusBarHeight + topMargin
                 }else {
-                    collectionTop = UIDevice.navigationBarHeight
+                    collectionTop = UIDevice.navigationBarHeight + topMargin
                 }
             }else {
-                collectionTop = nav.navigationBar.height
+                collectionTop = nav.navigationBar.height + topMargin
             }
         }
         if let pickerController = pickerController {

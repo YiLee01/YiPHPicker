@@ -87,6 +87,7 @@ class PickerCamerViewCell: UICollectionViewCell {
             }
         }
     }
+    
     func startSession() {
         captureView.startSession { [weak self] isFinished in
             if isFinished {
@@ -96,13 +97,19 @@ class PickerCamerViewCell: UICollectionViewCell {
             }
         }
     }
+    
     func stopSession() {
         captureView.stopSession()
     }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         captureView.frame = bounds
         imageView.center = CGPoint(x: width * 0.5, y: height * 0.5)
+        
+        guard let config = config else { return }
+        layer.cornerRadius = config.cornerRadius
+        layer.masksToBounds = true
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
