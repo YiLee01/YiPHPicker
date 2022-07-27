@@ -41,6 +41,8 @@ public struct AlbumListConfiguration {
     /// 左右边缘边距
     public var horizontalMargin: CGFloat = 0
     
+    public var edginset: UIEdgeInsets?
+    
     /// cell背景颜色
     public var cellBackgroundColor: UIColor = .white
     
