@@ -7,6 +7,8 @@
 
 import UIKit
 
+public let MaximumSelectedNotification = Notification.Name(rawValue: "MaximumSelectedNotification")
+
 extension PhotoPickerView {
     
     func setup() {
@@ -278,16 +280,21 @@ extension PhotoPickerView {
                 updateCellSelectedTitle()
             }
         }
+        
         if manager.selectArrayIsFull() && showHUD {
-            ProgressHUD.showWarning(
-                addedTo: UIApplication.shared.keyWindow,
-                text: String(
-                    format: "已达到最大选择数".localized,
-                    arguments: [manager.config.maximumSelectedPhotoCount]
-                ),
-                animated: true,
-                delayHide: 1.5
-            )
+            if manager.config.canShowMaximumSelectedHub {
+                ProgressHUD.showWarning(
+                    addedTo: UIApplication.shared.keyWindow,
+                    text: String(
+                        format: "已达到最大选择数".localized,
+                        arguments: [manager.config.maximumSelectedPhotoCount]
+                    ),
+                    animated: true,
+                    delayHide: 1.5
+                )
+            } else {
+                NotificationCenter.default.post(name: MaximumSelectedNotification, object: nil)
+            }
         }
     }
     

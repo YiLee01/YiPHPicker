@@ -136,7 +136,7 @@ public struct PickerBottomViewConfiguration {
     public var customSelectedViewCellClass: PhotoPreviewSelectedViewCell.Type?
     
     /// 已选资源选中的勾勾颜色
-    public var selectedViewTickColor: UIColor = .white
+    public var selectedViewTickColor: UIColor = .black
     
     public init() {
         var boxConfig = SelectBoxConfiguration.init()

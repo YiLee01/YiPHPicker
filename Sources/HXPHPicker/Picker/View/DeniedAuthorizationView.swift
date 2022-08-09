@@ -8,11 +8,11 @@
 
 import UIKit
  
-class DeniedAuthorizationView: UIView {
+open class DeniedAuthorizationView: UIView {
     
     let config: NotAuthorizedConfiguration
     
-    lazy var navigationBar: UINavigationBar = {
+    public lazy var navigationBar: UINavigationBar = {
         let navigationBar = UINavigationBar.init()
         navigationBar.setBackgroundImage(
             UIImage.image(
@@ -28,7 +28,7 @@ class DeniedAuthorizationView: UIView {
         return navigationBar
     }()
     
-    lazy var closeBtn: UIButton = {
+    public lazy var closeBtn: UIButton = {
         let closeBtn = UIButton.init(type: .custom)
         closeBtn.size = CGSize(width: 50, height: 40)
         closeBtn.addTarget(self, action: #selector(didCloseClick), for: .touchUpInside)
@@ -36,34 +36,34 @@ class DeniedAuthorizationView: UIView {
         return closeBtn
     }()
     
-    lazy var titleLb: UILabel = {
+    public lazy var titleLb: UILabel = {
         let titleLb = UILabel.init()
         titleLb.textAlignment = .center
         titleLb.numberOfLines = 0
         return titleLb
     }()
     
-    lazy var subTitleLb: UILabel = {
+    public lazy var subTitleLb: UILabel = {
         let subTitleLb = UILabel.init()
         subTitleLb.textAlignment = .center
         subTitleLb.numberOfLines = 0
         return subTitleLb
     }()
     
-    lazy var jumpBtn: UIButton = {
+    public lazy var jumpBtn: UIButton = {
         let jumpBtn = UIButton.init(type: .custom)
-        jumpBtn.layer.cornerRadius = 5
+        jumpBtn.layer.cornerRadius = config.jumpButtonCornerRadius
         jumpBtn.addTarget(self, action: #selector(jumpSetting), for: .touchUpInside)
         return jumpBtn
     }()
     
-    init(config: NotAuthorizedConfiguration) {
+    public init(config: NotAuthorizedConfiguration) {
         self.config = config
         super.init(frame: CGRect.zero)
         configView()
     }
     
-    func configView() {
+    public func configView() {
         if !config.hiddenCloseButton {
             addSubview(navigationBar)
         }
@@ -82,7 +82,8 @@ class DeniedAuthorizationView: UIView {
         
         configColor()
     }
-    func configColor() {
+    
+    public func configColor() {
         let closeButtonImageName = config.closeButtonImageName
         let closeButtonDarkImageName = config.closeButtonDarkImageName
         let isDark = PhotoManager.isDark
@@ -93,14 +94,15 @@ class DeniedAuthorizationView: UIView {
         jumpBtn.backgroundColor = isDark ? config.jumpButtonDarkBackgroundColor : config.jumpButtonBackgroundColor
         jumpBtn.setTitleColor(isDark ? config.jumpButtonTitleDarkColor : config.jumpButtonTitleColor, for: .normal)
     }
-    @objc func didCloseClick() {
+    
+    @objc public func didCloseClick() {
         self.viewController?.dismiss(animated: true, completion: nil)
     }
-    @objc func jumpSetting() {
+    @objc public func jumpSetting() {
         PhotoTools.openSettingsURL()
     }
     
-    override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         var barHeight: CGFloat = 0
         var barY: CGFloat = 0
@@ -132,25 +134,28 @@ class DeniedAuthorizationView: UIView {
         
         let jumpBtnBottomMargin: CGFloat = UIDevice.isProxy() ? 120 : 50
         var jumpBtnWidth = (jumpBtn.currentTitle?.width(ofFont: jumpBtn.titleLabel!.font, maxHeight: 40) ?? 0 ) + 10
-        if jumpBtnWidth < 150 {
-            jumpBtnWidth = 150
+        if jumpBtnWidth < 208 {
+            jumpBtnWidth = 208
         }
+        
         let jumpY: CGFloat
         if barHeight == 0 {
-            jumpY = height - UIDevice.bottomMargin - 50
-        }else {
-            jumpY = height - UIDevice.bottomMargin - 40 - jumpBtnBottomMargin
+//            jumpY = height - UIDevice.bottomMargin - 50
+            jumpY = subTitleLb.frame.maxY + 49 + 31
+        } else {
+//            jumpY = height - UIDevice.bottomMargin - 40 - jumpBtnBottomMargin
+            jumpY = subTitleLb.frame.maxY + 49 + 31
         }
         jumpBtn.frame = CGRect(
             x: 0,
             y: jumpY,
             width: jumpBtnWidth,
-            height: 40
+            height: 49
         )
         jumpBtn.centerX = width * 0.5
     }
     
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         if #available(iOS 13.0, *) {
             if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
@@ -158,7 +163,8 @@ class DeniedAuthorizationView: UIView {
             }
         }
     }
-    required init?(coder: NSCoder) {
+    
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

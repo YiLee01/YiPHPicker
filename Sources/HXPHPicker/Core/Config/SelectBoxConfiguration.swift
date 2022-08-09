@@ -21,7 +21,7 @@ public struct SelectBoxConfiguration {
     public var titleFontSize: CGFloat = 16
     
     /// 选中之后的 标题 颜色
-    public var titleColor: UIColor = .white
+    public var titleColor: UIColor = .black
     
     /// 暗黑风格下选中之后的 标题 颜色
     public var titleDarkColor: UIColor = .white

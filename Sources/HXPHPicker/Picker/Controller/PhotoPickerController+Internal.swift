@@ -581,7 +581,11 @@ extension PhotoPickerController {
         }
         if let text = text, !canSelect, showHUD {
             if DispatchQueue.isMain {
-                ProgressHUD.showWarning(addedTo: view, text: text, animated: true, delayHide: 1.5)
+                if config.canShowMaximumSelectedHub {
+                    ProgressHUD.showWarning(addedTo: view, text: text, animated: true, delayHide: 1.5)
+                } else {
+                    NotificationCenter.default.post(name: MaximumSelectedNotification, object: nil)
+                }
             }else {
                 DispatchQueue.main.async {
                     ProgressHUD.showWarning(addedTo: self.view, text: text, animated: true, delayHide: 1.5)

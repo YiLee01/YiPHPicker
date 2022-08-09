@@ -323,8 +323,8 @@ public class PhotoPickerViewController: BaseViewController {
         }
         if isMultipleSelect {
             let promptHeight: CGFloat = (AssetManager.authorizationStatusIsLimited() &&
-                                            config.bottomView.showPrompt &&
-                                            allowLoadPhotoLibrary) ? 70 : 0
+                                         config.bottomView.showPrompt &&
+                                         allowLoadPhotoLibrary) ? 70 : 0
             let bottomHeight: CGFloat = 50 + UIDevice.bottomMargin + promptHeight
             bottomView.frame = CGRect(x: 0, y: view.height - bottomHeight, width: view.width, height: bottomHeight)
             collectionView.contentInset = UIEdgeInsets(
@@ -436,12 +436,12 @@ extension PhotoPickerViewController {
                     action: #selector(didCancelItemClick)
                 )
             }else {
+                let image = UIImage.image(
+                    for: PhotoManager.isDark ?
+                    config.cancelDarkImageName : config.cancelImageName
+                )
                 cancelItem = UIBarButtonItem(
-                    image: UIImage.image(
-                        for: PhotoManager.isDark ?
-                            config.cancelDarkImageName :
-                            config.cancelImageName
-                    ),
+                    image: image,
                     style: .done,
                     target: self,
                     action: #selector(didCancelItemClick)
@@ -475,8 +475,8 @@ extension PhotoPickerViewController {
         view.backgroundColor = isDark ? config.backgroundDarkColor : config.backgroundColor
         collectionView.backgroundColor = isDark ? config.backgroundDarkColor : config.backgroundColor
         let titleColor = isDark ?
-            picker.config.navigationTitleDarkColor :
-            picker.config.navigationTitleColor
+        picker.config.navigationTitleDarkColor :
+        picker.config.navigationTitleColor
         if picker.config.albumShowMode == .popup {
             titleView.titleColor = titleColor
         }else {

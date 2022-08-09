@@ -636,10 +636,15 @@ extension PickerManager {
             }
         }
         if let text = text, !canSelect, showHUD {
-            ProgressHUD.showWarning(
-                addedTo: UIApplication.shared.keyWindow,
-                text: text, animated: true, delayHide: 1.5
-            )
+            if config.canShowMaximumSelectedHub {
+                ProgressHUD.showWarning(
+                    addedTo: UIApplication.shared.keyWindow,
+                    text: text, animated: true, delayHide: 1.5
+                )
+            } else {
+                NotificationCenter.default.post(name: MaximumSelectedNotification, object: nil)
+            }
+            
         }
         return canSelect
     }

@@ -63,6 +63,9 @@ public class PickerConfiguration: BaseConfiguration {
     /// 照片选择的最大文件大小，为0则不限制
     public var maximumSelectedPhotoFileSize: Int = 0
     
+    ///
+    public var canShowMaximumSelectedHub: Bool = true
+    
     #if HXPICKER_ENABLE_EDITOR
     /// 可编辑资源类型
     /// 视频允许编辑：当选择的视频时长超过限制将自动进入编辑界面

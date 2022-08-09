@@ -50,5 +50,8 @@ public struct NotAuthorizedConfiguration {
     /// 暗黑风格下跳转按钮文字颜色
     public var jumpButtonTitleDarkColor: UIColor = "#333333".color
     
+    ///
+    public var jumpButtonCornerRadius: CGFloat = 5.0
+    
     public init() { }
 }
