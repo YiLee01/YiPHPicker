@@ -53,7 +53,8 @@ open class PhotoEditorConfiguration: EditorConfiguration {
             imageName: "hx_editor_tools_filter",
             type: .filter
         )
-        return .init(toolOptions: [graffiti, chartlet, text, crop, mosaic, filter])
+//        return .init(toolOptions: [graffiti, chartlet, text, crop, mosaic, filter])
+        return .init(toolOptions: [graffiti, text, crop, mosaic, filter])
     }()
     
     /// 画笔

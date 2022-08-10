@@ -19,7 +19,7 @@ public struct EditorToolViewConfiguration {
     public var musicSelectedColor: UIColor = .systemTintColor
     
     /// 完成按钮标题颜色
-    public var finishButtonTitleColor: UIColor = .white
+    public var finishButtonTitleColor: UIColor = .black
     
     /// 暗黑风格下完成按钮标题颜色
     public var finishButtonTitleDarkColor: UIColor = .white

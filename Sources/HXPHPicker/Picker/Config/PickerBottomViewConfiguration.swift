@@ -63,7 +63,7 @@ public struct PickerBottomViewConfiguration {
     public var originalSelectBox: SelectBoxConfiguration
     
     /// 完成按钮按钮的圆角半径
-    public var finishButtonCornerRadius: CGFloat = 3
+    public var finishButtonCornerRadius: CGFloat = 10
     
     /// 完成按钮标题颜色
     public var finishButtonTitleColor: UIColor = .white

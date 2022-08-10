@@ -62,7 +62,7 @@ public class EditorToolView: UIView {
         let finishButton = UIButton.init(type: .custom)
         finishButton.setTitle("完成".localized, for: .normal)
         finishButton.titleLabel?.font = UIFont.mediumPingFang(ofSize: 16)
-        finishButton.layer.cornerRadius = 3
+        finishButton.layer.cornerRadius = 10
         finishButton.layer.masksToBounds = true
         finishButton.addTarget(self, action: #selector(didFinishButtonClick(button:)), for: .touchUpInside)
         return finishButton
