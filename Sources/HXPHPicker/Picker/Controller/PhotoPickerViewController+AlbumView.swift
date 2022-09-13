@@ -87,7 +87,12 @@ extension PhotoPickerViewController: AlbumViewDelegate {
             bottom: verticalMargin,
             right: horizontalMargin
         )
-        if albumViewHeight > view.height * 0.75 {
+        
+        if let maxY = navigationController?.navigationBar.frame.maxY {
+            if albumViewHeight > view.height - maxY {
+                albumViewHeight = view.height - maxY
+            }
+        } else if albumViewHeight > view.height * 0.75 {
             albumViewHeight = view.height * 0.75
         }
         return albumViewHeight
